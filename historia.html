@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>I wojna światowa: pojęcia do nauki</title>
+<style>
+:root{
+  --paper:#f3ede0; --paper2:#ebe3d1; --ink:#1f1b16; --mute:#6b6358; --line:#d6ccb6;
+  --red:#a8362a; --olive:#56653a; --blue:#4f72a0; --ochre:#b5812b;
+  --disp:"Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
+  --body:Georgia,"Times New Roman",serif;
+  --lab:Bahnschrift,"DIN Alternate","Arial Narrow",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);line-height:1.5;
+  background-image:radial-gradient(rgba(120,100,60,.07) 1px,transparent 1px);background-size:4px 4px;padding-bottom:70px}
+header{max-width:1100px;margin:0 auto;padding:40px 24px 16px;border-bottom:3px double var(--ink);display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:space-between}
+.kick{font-family:var(--lab);letter-spacing:.18em;text-transform:uppercase;font-size:12px;color:var(--red)}
+h1{font-family:var(--disp);font-size:clamp(34px,5vw,56px);line-height:1;margin:6px 0 0;font-weight:700}
+h1 em{color:var(--red);font-style:italic}
+.prog{font-family:var(--lab);font-size:13px;color:var(--mute);text-align:right}
+.bar{width:220px;height:8px;border:1px solid var(--ink);margin-top:6px;background:#fff8}
+.bar i{display:block;height:100%;background:var(--olive);width:0;transition:width .4s}
+nav{max-width:1100px;margin:0 auto;padding:14px 24px;display:flex;gap:8px;flex-wrap:wrap;position:sticky;top:0;background:var(--paper);z-index:5;border-bottom:1px solid var(--line)}
+nav button,.chip{font-family:var(--lab);font-size:14px;letter-spacing:.06em;text-transform:uppercase;border:1.5px solid var(--ink);background:transparent;color:var(--ink);padding:8px 14px;cursor:pointer}
+nav button.on{background:var(--ink);color:var(--paper)}
+main{max-width:1100px;margin:0 auto;padding:20px 24px}
+.view{display:none}.view.on{display:block;animation:up .35s ease}
+@keyframes up{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin:4px 0 18px}
+.chip{font-size:12px;padding:5px 10px;border-width:1px}
+.chip.on{background:var(--c,var(--ink));border-color:var(--c,var(--ink));color:#fff}
+.sec-h{display:flex;align-items:baseline;gap:14px;margin:30px 0 12px}
+.sec-h b{font-family:var(--disp);font-size:44px;color:var(--c);line-height:1}
+.sec-h h2{font-family:var(--disp);font-size:24px;margin:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.card{background:#fffdf7;border:1px solid var(--line);border-top:4px solid var(--c);padding:16px 18px;position:relative;box-shadow:2px 3px 0 var(--paper2)}
+.card h3{font-family:var(--disp);font-size:20px;margin:0 0 2px}
+.date{font-family:var(--lab);font-size:12px;letter-spacing:.08em;color:var(--c);text-transform:uppercase}
+.card p{margin:8px 0;font-size:15px}
+.card ul{margin:6px 0 0;padding-left:18px;font-size:14px;color:#3a342c}
+.card li{margin:2px 0}
+.hook{margin-top:10px;font-size:13.5px;background:var(--paper);border-left:3px solid var(--ochre);padding:6px 10px;font-style:italic}
+.hook::before{content:"Zapamiętaj: ";font-style:normal;font-family:var(--lab);color:var(--ochre);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.tick{position:absolute;top:12px;right:12px;width:24px;height:24px;border:1.5px solid var(--ink);border-radius:50%;background:transparent;cursor:pointer;font-size:13px;line-height:20px}
+.tick.ok{background:var(--olive);border-color:var(--olive);color:#fff}
+/* fiszki */
+.fc-wrap{max-width:620px;margin:20px auto;text-align:center}
+.flip{perspective:1200px;height:360px;cursor:pointer}
+.flip-in{position:relative;width:100%;height:100%;transition:transform .55s;transform-style:preserve-3d}
+.flip.r .flip-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;background:#fffdf7;border:1.5px solid var(--ink);box-shadow:6px 6px 0 var(--c,var(--ink));display:flex;flex-direction:column;justify-content:center;padding:28px;overflow:auto}
+.face.b{transform:rotateY(180deg);text-align:left;justify-content:flex-start}
+.face .big{font-family:var(--disp);font-size:36px;line-height:1.1}
+.face small{font-family:var(--lab);color:var(--mute);letter-spacing:.1em;text-transform:uppercase;margin-top:14px}
+.face.b p{margin:6px 0;font-size:15.5px}
+.face.b ul{font-size:14px;padding-left:18px;margin:6px 0}
+.row{display:flex;gap:10px;justify-content:center;margin-top:22px;flex-wrap:wrap}
+.btn{font-family:var(--lab);font-size:15px;padding:10px 18px;border:1.5px solid var(--ink);background:#fffdf7;cursor:pointer;letter-spacing:.04em}
+.btn.g{background:var(--olive);color:#fff;border-color:var(--olive)}
+.btn.r{background:var(--red);color:#fff;border-color:var(--red)}
+.meta{font-family:var(--lab);color:var(--mute);font-size:13px;margin-top:10px}
+/* quiz */
+.q{max-width:720px;margin:20px auto}
+.q .clue{background:#fffdf7;border:1.5px solid var(--ink);padding:22px 24px;font-size:18px;box-shadow:5px 5px 0 var(--paper2)}
+.q .type{font-family:var(--lab);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin-bottom:8px}
+.opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+.opt{font-family:var(--body);font-size:16px;text-align:left;padding:12px 14px;border:1.5px solid var(--ink);background:transparent;cursor:pointer}
+.opt:hover{background:#fffdf7}
+.opt.ok{background:var(--olive);color:#fff;border-color:var(--olive)}
+.opt.bad{background:var(--red);color:#fff;border-color:var(--red)}
+.score{display:flex;justify-content:space-between;font-family:var(--lab);color:var(--mute);margin-bottom:10px}
+.expl{margin-top:12px;font-size:14.5px;color:#3a342c;min-height:22px}
+/* oś czasu */
+.tl{position:relative;margin:20px 0 0 12px;border-left:2px solid var(--ink);padding-left:26px}
+.ev{position:relative;margin:0 0 16px}
+.ev::before{content:"";position:absolute;left:-33px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--c);border:2px solid var(--paper)}
+.ev .d{font-family:var(--lab);font-size:13px;color:var(--c);letter-spacing:.06em}
+.ev .t{font-family:var(--disp);font-size:18px;font-weight:700}
+.ev .s{font-size:14px;color:#3a342c}
+.yr{font-family:var(--disp);font-size:30px;margin:26px 0 10px -26px;background:var(--paper);display:inline-block;padding-right:10px;font-style:italic}
+@media(max-width:600px){.opts{grid-template-columns:minmax(0,1fr)}.flip{height:420px}}
+@media print{nav,.tick,.filters{display:none}.view{display:none!important}#v-learn{display:block!important}.card{break-inside:avoid;box-shadow:none}body{padding:0}}
+</style>
+</head>
+<body>
+<header>
+  <div><div class="kick">Zeszyt powtórkowy · Historia</div><h1>I wojna światowa <em>1914–1918</em></h1></div>
+  <div class="prog"><span id="pt">0 / 0 opanowanych</span><div class="bar"><i id="pb"></i></div></div>
+</header>
+<nav>
+  <button data-v="learn" class="on">Ucz się</button>
+  <button data-v="fc">Fiszki</button>
+  <button data-v="quiz">Quiz</button>
+  <button data-v="tl">Oś czasu</button>
+</nav>
+<main>
+  <section class="view on" id="v-learn"><div class="filters" id="flt"></div><div id="learn"></div></section>
+  <section class="view" id="v-fc"><div class="filters" id="fcflt"></div><div class="fc-wrap" id="fc"></div></section>
+  <section class="view" id="v-quiz"><div class="filters" id="qflt"></div><div class="q" id="quiz"></div></section>
+  <section class="view" id="v-tl"><div id="tl"></div></section>
+</main>
+<script>
+const SECS=[
+ {n:1,t:"Początek wojny i działania do 1916",c:"var(--red)"},
+ {n:2,t:"Rewolucje w Rosji",c:"var(--ochre)"},
+ {n:3,t:"Sprawa polska",c:"var(--olive)"},
+ {n:4,t:"Lata 1916–1918 i koniec wojny",c:"var(--blue)"}
+];
+const D=[
+// 1
+{s:1,k:"Trójprzymierze",d:"1882",y:1882,def:"Sojusz Niemiec, Austro-Węgier i Włoch. W czasie wojny trzon tzw. państw centralnych (Niemcy, Austro-Węgry, potem Turcja i Bułgaria).",f:["Włochy nie weszły do wojny w 1914, a w 1915 przeszły na stronę ententy","Państwa centralne = Niemcy, Austro-Węgry, Turcja (1914), Bułgaria (1915)"],h:"3 państwa w środku Europy: N + A-W + W (Włochy „zdradziły” w 1915)."},
+{s:1,k:"Trójporozumienie (ententa)",d:"1904–1907",y:1907,def:"Blok Francji, Wielkiej Brytanii i Rosji, powstały przez kolejne porozumienia dwustronne. Główny przeciwnik państw centralnych.",f:["1892–93 sojusz francusko-rosyjski","1904 entente cordiale (Francja–W. Brytania)","1907 porozumienie rosyjsko-brytyjskie","Później dołączyły m.in. Włochy (1915) i USA (1917)"],h:"Entente = po francusku „porozumienie”; F + WB + R."},
+{s:1,k:"Zamach w Sarajewie",d:"28 VI 1914",y:1914.49,def:"Zabójstwo następcy tronu austro-węgierskiego, arcyksięcia Franciszka Ferdynanda, i jego żony przez serbskiego nacjonalistę Gawriłę Principa. Bezpośrednia przyczyna wojny.",f:["Za zamachem stała serbska organizacja Czarna Ręka","Austro-Węgry wysłały Serbii ultimatum, a 28 VII 1914 wypowiedziały jej wojnę","Uruchomił się system sojuszy: Rosja → Niemcy → Francja → W. Brytania"],h:"Pretekst, nie główna przyczyna. Głębsze: rywalizacja mocarstw, wyścig zbrojeń, kolonie."},
+{s:1,k:"Plan Schlieffena",d:"przed 1914 (realizacja VIII 1914)",y:1914.59,def:"Niemiecki plan wojny: błyskawicznie pokonać Francję uderzeniem przez neutralną Belgię (ok. 6 tygodni), a potem przerzucić siły przeciw wolniej mobilizującej się Rosji.",f:["Cel: uniknąć wojny na dwa fronty","Złamanie neutralności Belgii → W. Brytania wypowiada wojnę Niemcom (4 VIII 1914)","Upadł po bitwie nad Marną"],h:"Najpierw Francja, potem Rosja: wojna błyskawiczna, która nie wyszła."},
+{s:1,k:"Bitwa nad Marną",d:"5–12 IX 1914",y:1914.68,def:"Zatrzymanie ofensywy niemieckiej pod Paryżem przez wojska francuskie i brytyjskie. Oznaczała klęskę planu Schlieffena.",f:["Nazywana „cudem nad Marną”","Posiłki dowożono na front m.in. paryskimi taksówkami","Skutek: front na zachodzie się zatrzymał → wojna pozycyjna"],h:"Marna = koniec wojny błyskawicznej."},
+{s:1,k:"Bitwa pod Tannenbergiem",d:"26–30 VIII 1914",y:1914.65,def:"Rozbicie armii rosyjskiej, która wkroczyła do Prus Wschodnich, przez Niemców pod dowództwem Paula von Hindenburga i Ericha Ludendorffa.",f:["Rosja zaatakowała szybciej, niż zakładali Niemcy","Klęska 2. armii gen. Samsonowa (popełnił samobójstwo)","Niemcy przedstawiali ją jako „odwet za Grunwald”"],h:"Front wschodni, Prusy Wschodnie, Hindenburg."},
+{s:1,k:"Bitwa pod Gorlicami",d:"2 V 1915",y:1915.33,def:"Przełamanie frontu rosyjskiego w Galicji przez wojska niemieckie i austro-węgierskie (dowódca gen. August von Mackensen).",f:["Rosjanie wycofali się z Galicji, a latem 1915 z Królestwa Polskiego","5 VIII 1915 Niemcy zajęli Warszawę","Największa bitwa na ziemiach polskich w tej wojnie"],h:"Gorlice → Rosjanie tracą ziemie polskie."},
+{s:1,k:"Wojna pozycyjna",d:"od końca 1914",y:1914.9,def:"Sposób prowadzenia walk, w którym armie okopują się na stałych liniach, a ataki przynoszą ogromne straty przy minimalnych zdobyczach terenu.",f:["Front zachodni: od kanału La Manche do Szwajcarii","Okopy, drut kolczasty, karabiny maszynowe, artyleria","Próby przełamania: gaz bojowy (Ypres 1915), czołgi (Somma 1916)"],h:"Przeciwieństwo wojny manewrowej: front stoi w miejscu."},
+{s:1,k:"Wojna totalna",d:"1914–1918",y:null,def:"Wojna, w której mobilizuje się całe społeczeństwo i gospodarkę państwa, a granica między frontem a zapleczem się zaciera.",f:["Gospodarka podporządkowana produkcji wojennej, system kartkowy","Kobiety zastępują mężczyzn w fabrykach","Masowa propaganda i cenzura","Ataki na ludność cywilną (np. naloty, wojna podwodna)"],h:"Walczy nie tylko armia, ale całe państwo."},
+// 2
+{s:2,k:"Rewolucja lutowa",d:"luty/marzec 1917",y:1917.17,def:"Wybuch zamieszek w Piotrogrodzie wywołany głodem i zmęczeniem wojną, zakończony obaleniem caratu.",f:["Car Mikołaj II abdykował (marzec 1917)","Powstała dwuwładza: Rząd Tymczasowy i rady (sowiety) delegatów robotniczych i żołnierskich","Rosja nadal walczyła w wojnie"],h:"Luty = upadek cara. Data różni się o 13 dni (kalendarz juliański vs gregoriański)."},
+{s:2,k:"Rząd Tymczasowy",d:"III–XI 1917",y:1917.2,def:"Władza powstała po rewolucji lutowej (najpierw z ks. Lwowem, potem Aleksandrem Kiereńskim na czele). Miała rządzić do zwołania Konstytuanty.",f:["Kontynuował wojnę po stronie ententy","Odkładał reformę rolną","30 III 1917 uznał prawo Polaków do niepodległości (w sojuszu z Rosją)","Obalony przez bolszewików w październiku"],h:"Kiereński + kontynuacja wojny = utrata poparcia."},
+{s:2,k:"Bolszewicy",d:"od 1903",y:null,def:"Radykalna frakcja rosyjskich socjaldemokratów kierowana przez Lenina, dążąca do rewolucji i dyktatury proletariatu.",f:["Powstali z rozłamu w partii w 1903 (umiarkowani to mienszewicy)","Hasła: pokój, ziemia, chleb; cała władza w ręce rad","Po przejęciu władzy partia komunistyczna"],h:"„Bolszinstwo” = większość (wygrali jedno głosowanie w 1903)."},
+{s:2,k:"Tezy kwietniowe",d:"IV 1917",y:1917.29,def:"Program Lenina ogłoszony po jego powrocie do Rosji: odrzucenie Rządu Tymczasowego i przygotowanie rewolucji socjalistycznej.",f:["„Cała władza w ręce rad”","Natychmiastowy pokój","Konfiskata ziemi obszarniczej, nacjonalizacja banków","Lenin wrócił ze Szwajcarii przez Niemcy w zaplombowanym wagonie (Niemcy liczyli na wyjście Rosji z wojny)"],h:"Kwiecień: Lenin wraca i mówi „nie” Rządowi Tymczasowemu."},
+{s:2,k:"Rewolucja październikowa",d:"24–25 X (6–7 XI) 1917",y:1917.85,def:"Zbrojny przewrót bolszewików w Piotrogrodzie, obalenie Rządu Tymczasowego i szturm na Pałac Zimowy.",f:["Akcją kierował Komitet Wojskowo-Rewolucyjny (Trocki)","Władzę objęła Rada Komisarzy Ludowych z Leninem","Dekret o pokoju i dekret o ziemi","Początek wojny domowej i państwa komunistycznego"],h:"Październik = bolszewicy u władzy. W nowym kalendarzu to już listopad."},
+{s:2,k:"Włodzimierz Lenin",d:"1870–1924",y:null,def:"Właśc. Uljanow; przywódca bolszewików, autor tez kwietniowych, przewodniczący Rady Komisarzy Ludowych, twórca państwa sowieckiego.",f:["Doprowadził do pokoju brzeskiego (1918)","Wprowadził terror (Czeka) i komunizm wojenny"],h:"Ideolog i szef rewolucji."},
+{s:2,k:"Mikołaj II",d:"car 1894–1917",y:null,def:"Ostatni car Rosji z dynastii Romanowów. Abdykował w czasie rewolucji lutowej.",f:["Od 1915 osobiście dowodził armią, co obciążało go klęskami","Zamordowany z rodziną przez bolszewików w Jekaterynburgu (VII 1918)"],h:"Ostatni Romanow."},
+{s:2,k:"Lew Trocki",d:"1879–1940",y:null,def:"Jeden z przywódców bolszewików, przewodniczący Rady Piotrogrodzkiej i organizator przewrotu październikowego.",f:["Jako komisarz spraw zagranicznych prowadził rokowania w Brześciu („ani wojny, ani pokoju”)","Twórca Armii Czerwonej","Później przegrał ze Stalinem; zamordowany w Meksyku"],h:"Organizator przewrotu i Armii Czerwonej."},
+// 3
+{s:3,k:"Orientacja proaustriacka",d:"1914",y:null,def:"Koncepcja odzyskania niepodległości u boku Austro-Węgier (i Niemiec) przeciw Rosji, uznanej za głównego wroga.",f:["Przywódca: Józef Piłsudski; silna w Galicji","Koncepcja trialistyczna: Polska jako trzecia część monarchii habsburskiej","Naczelny Komitet Narodowy (Kraków, 16 VIII 1914) i Legiony Polskie"],h:"Wróg = Rosja. Sojusznik = Austria."},
+{s:3,k:"Orientacja prorosyjska",d:"1914",y:null,def:"Koncepcja zjednoczenia ziem polskich pod berłem cara (z autonomią) u boku ententy, bo za głównego wroga uznano Niemcy.",f:["Przywódca: Roman Dmowski, Narodowa Demokracja (endecja)","Komitet Narodowy Polski (1914), Legion Puławski","Odezwa wielkiego księcia Mikołaja Mikołajewicza (VIII 1914) obiecywała zjednoczenie Polski"],h:"Wróg = Niemcy. Sojusznik = Rosja (potem cała ententa)."},
+{s:3,k:"Józef Piłsudski",d:"1867–1935",y:null,def:"Przywódca orientacji proaustriackiej, twórca Związku Strzeleckiego, I Kompanii Kadrowej i komendant I Brygady Legionów.",f:["Członek Tymczasowej Rady Stanu (1917)","Po kryzysie przysięgowym więziony w Magdeburgu","Zwolniony, 10 XI 1918 przybył do Warszawy, 11 XI przejął dowództwo wojska"],h:"Czyn zbrojny: najpierw z Austrią przeciw Rosji, potem przeciw wszystkim zaborcom."},
+{s:3,k:"Roman Dmowski",d:"1864–1939",y:null,def:"Przywódca endecji i orientacji prorosyjskiej, później proententowskiej. Działał dyplomatycznie na Zachodzie.",f:["Od 1917 przewodniczący Komitetu Narodowego Polskiego w Paryżu, uznanego przez ententę","KNP politycznie zwierzchnikiem Błękitnej Armii","Delegat Polski na konferencji pokojowej w Paryżu (1919)"],h:"Dyplomacja, nie czyn zbrojny."},
+{s:3,k:"I Kompania Kadrowa",d:"6 VIII 1914",y:1914.6,def:"Pierwszy polski oddział, który wyruszył z krakowskich Oleandrów do Królestwa Polskiego, by wywołać powstanie przeciw Rosji.",f:["Utworzona przez Piłsudskiego ze strzelców; dowódca Tadeusz Kasprzycki","Wkroczyła do Kielc (12 VIII)","Ludność przyjęła ją chłodno, powstanie nie wybuchło","Zalążek Legionów"],h:"Oleandry → Kielce. Początek polskiego czynu zbrojnego."},
+{s:3,k:"Legiony Polskie",d:"1914–1917",y:1914.65,def:"Polskie oddziały wojskowe walczące u boku Austro-Węgier przeciw Rosji, utworzone przy Naczelnym Komitecie Narodowym.",f:["I Brygada (Piłsudski), II Brygada „Karpacka” (m.in. Haller), III Brygada","Bitwy: Kostiuchnówka (1916), Rarańcza (1918)","Rozbite po kryzysie przysięgowym (1917)"],h:"Polskie wojsko pod austriackim sztandarem."},
+{s:3,k:"Akt 5 listopada",d:"5 XI 1916",y:1916.85,def:"Manifest cesarzy Niemiec i Austro-Węgier zapowiadający utworzenie Królestwa Polskiego z ziem zabranych Rosji, jako dziedzicznej monarchii konstytucyjnej.",f:["Granice i władca nieokreślone, państwo zależne od Niemiec","Cel: pozyskanie polskiego rekruta do wojska","Sprawa polska stała się międzynarodowa; powstały Tymczasowa Rada Stanu i Rada Regencyjna"],h:"Pierwsza obietnica państwa polskiego, ale kadłubowego i dla rekruta."},
+{s:3,k:"Kryzys przysięgowy",d:"lipiec 1917",y:1917.55,def:"Odmowa złożenia przez większość legionistów (I i III Brygady) przysięgi na „braterstwo broni” z Niemcami i Austro-Węgrami.",f:["Piłsudski aresztowany i osadzony w Magdeburgu","Legionistów internowano w Szczypiornie i Beniaminowie","II Brygada przysięgła → Polski Korpus Posiłkowy","Działalność konspiracyjna przeszła do POW"],h:"Piłsudski zrywa z państwami centralnymi, gdy Rosja słabnie."},
+{s:3,k:"Błękitna Armia",d:"1917–1919",y:1917.43,def:"Armia polska utworzona we Francji, walcząca po stronie ententy; nazwa od niebieskich mundurów francuskich.",f:["Powołana dekretem prezydenta Francji (VI 1917)","Od X 1918 dowodzona przez Józefa Hallera, politycznie podległa KNP","Ok. 70 tys. żołnierzy, również ochotnicy z Ameryki","W 1919 przybyła do Polski i walczyła o granice"],h:"Niebieskie mundury, Francja, Haller."},
+{s:3,k:"Józef Haller",d:"1873–1960",y:null,def:"Generał, oficer II Brygady Legionów, później dowódca Błękitnej Armii we Francji.",f:["Po traktacie brzeskim z Ukrainą (oddanie Chełmszczyzny) przebił się przez front pod Rarańczą (II 1918)","Walczył z Niemcami pod Kaniowem (V 1918)","W 1920 dokonał zaślubin Polski z morzem w Pucku"],h:"Droga od Legionów (Austria) do ententy (Francja)."},
+// 4
+{s:4,k:"Bitwa pod Verdun",d:"II–XII 1916",y:1916.14,def:"Niemiecka ofensywa na francuską twierdzę, której celem było „wykrwawienie” armii francuskiej. Zakończyła się bez rozstrzygnięcia.",f:["Nazywana „młynem verdeńskim” lub „piekłem Verdun”","Obroną kierował gen. Philippe Pétain: „Nie przejdą!”","Straty obu stron ok. 700 tys. zabitych i rannych"],h:"Niemcy atakują, Francja się broni. Symbol bezsensu wojny pozycyjnej."},
+{s:4,k:"Bitwa nad Sommą",d:"VII–XI 1916",y:1916.5,def:"Ofensywa brytyjsko-francuska mająca odciążyć Verdun i przełamać front niemiecki. Jedna z najkrwawszych bitw wojny.",f:["Pierwszego dnia Brytyjczycy stracili ok. 57 tys. ludzi","Pierwsze użycie czołgów (15 IX 1916, Brytyjczycy)","Ponad milion strat przy zdobyczy kilkunastu kilometrów"],h:"Somma = czołgi. Ententa atakuje."},
+{s:4,k:"Nieograniczona wojna podwodna",d:"od 1 II 1917",y:1917.08,def:"Niemiecka strategia zatapiania bez ostrzeżenia wszystkich statków (także neutralnych) płynących do Wielkiej Brytanii, by zagłodzić ją i zmusić do kapitulacji.",f:["Wcześniej, 7 V 1915, U-boot zatopił liniowiec Lusitania (zginęło ponad 120 Amerykanów)","Bezpośrednia przyczyna przystąpienia USA do wojny","Ententa odpowiedziała systemem konwojów"],h:"U-booty topią wszystko → USA wchodzą do wojny."},
+{s:4,k:"Przystąpienie USA do wojny",d:"6 IV 1917",y:1917.26,def:"Wypowiedzenie wojny Niemcom przez Stany Zjednoczone, które przesądziło o przewadze ententy.",f:["Przyczyny: nieograniczona wojna podwodna, depesza Zimmermanna (niemiecka propozycja sojuszu dla Meksyku), kredyty i handel z ententą","Prezydent Woodrow Wilson; wojska gen. Pershinga","Zrównoważyło wyjście Rosji z wojny"],h:"Rosja wychodzi, USA wchodzą: ten sam rok 1917."},
+{s:4,k:"14 punktów Wilsona",d:"8 I 1918",y:1918.02,def:"Program pokojowy prezydenta USA przedstawiony w orędziu do Kongresu, oparty na zasadzie samostanowienia narodów.",f:["Jawna dyplomacja, wolność mórz, rozbrojenie","Pkt 13: niepodległa Polska z ziemiami bezspornie polskimi i wolnym dostępem do morza","Pkt 14: powołanie Ligi Narodów"],h:"Punkt 13 = Polska, punkt 14 = Liga Narodów."},
+{s:4,k:"Pokój brzeski",d:"3 III 1918",y:1918.17,def:"Traktat pokojowy w Brześciu Litewskim między Rosją bolszewicką a państwami centralnymi. Rosja wyszła z wojny.",f:["Rosja zrzekła się Polski, Litwy, Łotwy, Finlandii i uznała niepodległość Ukrainy","Wcześniej (9 II 1918) państwa centralne podpisały pokój z Ukrainą, oddając jej Chełmszczyznę → oburzenie Polaków, Rarańcza","Unieważniony po klęsce Niemiec"],h:"Brześć = koniec frontu wschodniego."},
+{s:4,k:"Rozejm w Compiègne",d:"11 XI 1918",y:1918.86,def:"Rozejm między Niemcami a ententą podpisany w wagonie marszałka Ferdinanda Focha w lesie Compiègne. Zakończył walki I wojny światowej.",f:["Wszedł w życie o godz. 11:00","Niemcy musiały wycofać wojska, oddać flotę i ciężką broń","Unieważnienie pokoju brzeskiego","11 XI to też polskie Święto Niepodległości"],h:"11.11, godz. 11. Koniec wojny."},
+{s:4,k:"Klęska państw centralnych",d:"1918",y:1918.7,def:"Załamanie Niemiec i ich sojuszników po nieudanej ofensywie wiosennej 1918 i kontrofensywie ententy wzmocnionej przez Amerykanów.",f:["Ofensywa wiosenna Ludendorffa → II bitwa nad Marną (VII 1918)","8 VIII 1918 Amiens: „czarny dzień armii niemieckiej”","Kapitulacje: Bułgaria (IX), Turcja (X), Austro-Węgry (3 XI)","Rewolucja w Niemczech, abdykacja Wilhelma II (9 XI 1918)"],h:"Sojusznicy Niemiec odpadają po kolei, potem upadają same Niemcy."},
+{s:4,k:"Skutki I wojny światowej",d:"po 1918",y:null,def:"Wojna zmieniła mapę i społeczeństwa Europy: upadły imperia, powstały nowe państwa, a cena była ogromna.",f:["Ok. 10 mln poległych żołnierzy, ok. 20 mln rannych","Upadek 4 imperiów: Rosji, Niemiec, Austro-Węgier, Turcji","Nowe państwa: Polska, Czechosłowacja, Królestwo SHS, Finlandia, kraje bałtyckie","Liga Narodów, ład wersalski; USA mocarstwem","Prawa wyborcze kobiet, epidemia hiszpanki, kryzys gospodarczy"],h:"4 imperia padły, Polska wróciła na mapę."}
+];
+D.forEach((x,i)=>x.id=i);
+const secOf=n=>SECS[n-1];
+let known=new Set(JSON.parse(localStorage.getItem("ww1known")||"[]"));
+const save=()=>{localStorage.setItem("ww1known",JSON.stringify([...known]));upd()};
+function upd(){document.getElementById("pt").textContent=known.size+" / "+D.length+" opanowanych";document.getElementById("pb").style.width=(known.size/D.length*100)+"%"}
+function filters(el,cb){const all=[{n:0,t:"Wszystkie",c:"var(--ink)"},...SECS];
+ el.innerHTML=all.map(s=>`<button class="chip${s.n==0?" on":""}" data-n="${s.n}" style="--c:${s.c}">${s.n?s.n+". ":""}${s.t}</button>`).join("");
+ el.onclick=e=>{const b=e.target.closest(".chip");if(!b)return;el.querySelectorAll(".chip").forEach(c=>c.classList.remove("on"));b.classList.add("on");cb(+b.dataset.n)};}
+// ucz się
+function renderLearn(f){const L=document.getElementById("learn");L.innerHTML=SECS.filter(s=>!f||s.n==f).map(s=>`
+ <div class="sec-h" style="--c:${s.c}"><b>${s.n}</b><h2>${s.t}</h2></div>
+ <div class="grid">${D.filter(x=>x.s==s.n).map(x=>`<article class="card" style="--c:${s.c}">
+ <button class="tick${known.has(x.id)?" ok":""}" data-id="${x.id}" title="Oznacz jako opanowane">✓</button>
+ <div class="date">${x.d}</div><h3>${x.k}</h3><p>${x.def}</p><ul>${x.f.map(i=>`<li>${i}</li>`).join("")}</ul><div class="hook">${x.h}</div></article>`).join("")}</div>`).join("")}
+document.getElementById("learn").onclick=e=>{const t=e.target.closest(".tick");if(!t)return;const id=+t.dataset.id;known.has(id)?known.delete(id):known.add(id);t.classList.toggle("ok");save()};
+filters(document.getElementById("flt"),renderLearn);renderLearn(0);
+// fiszki
+let deck=[],di=0,fcF=0;
+const shuf=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+function buildDeck(){const pool=D.filter(x=>!fcF||x.s==fcF);const unk=pool.filter(x=>!known.has(x.id));deck=shuf(unk.length?unk:pool);di=0;showCard()}
+function showCard(){const F=document.getElementById("fc");if(di>=deck.length){F.innerHTML=`<div class="face" style="position:static;height:240px;box-shadow:6px 6px 0 var(--olive)"><div class="big">Talia przerobiona!</div><small>${known.size} z ${D.length} pojęć opanowanych</small></div><div class="row"><button class="btn" id="again">Jeszcze raz</button></div>`;document.getElementById("again").onclick=buildDeck;return}
+ const x=deck[di],s=secOf(x.s);
+ F.innerHTML=`<div class="flip" id="fl" style="--c:${s.c}"><div class="flip-in">
+ <div class="face"><div class="date" style="color:${s.c}">${s.n}. ${s.t}</div><div class="big">${x.k}</div><small>Co to jest? Kliknij, by odwrócić</small></div>
+ <div class="face b"><div class="date" style="color:${s.c}">${x.d}</div><h3 style="font-family:var(--disp);margin:2px 0 4px;font-size:22px">${x.k}</h3><p>${x.def}</p><ul>${x.f.map(i=>`<li>${i}</li>`).join("")}</ul></div></div></div>
+ <div class="row"><button class="btn r" id="no">Jeszcze nie umiem</button><button class="btn g" id="yes">Umiem ✓</button></div>
+ <div class="meta">Karta ${di+1} z ${deck.length} · spacja odwraca kartę</div>`;
+ document.getElementById("fl").onclick=function(){this.classList.toggle("r")};
+ document.getElementById("yes").onclick=()=>{known.add(x.id);save();di++;showCard()};
+ document.getElementById("no").onclick=()=>{known.delete(x.id);save();deck.push(x);di++;showCard()};}
+filters(document.getElementById("fcflt"),n=>{fcF=n;buildDeck()});
+document.addEventListener("keydown",e=>{if(e.code=="Space"&&document.getElementById("v-fc").classList.contains("on")){const f=document.getElementById("fl");if(f){e.preventDefault();f.classList.toggle("r")}}});
+// quiz
+let qF=0,qs={ok:0,n:0};
+function newQ(){const Q=document.getElementById("quiz");const pool=D.filter(x=>!qF||x.s==qF);
+ const x=pool[Math.random()*pool.length|0];const dated=D.filter(d=>d.y&&d.y>1900);
+ let type,clue,ans,opts;
+ if(x.y&&x.y>1900&&Math.random()<.35){type="Kiedy to było?";clue=`<b>${x.k}</b>`;ans=x.d;opts=shuf([x.d,...shuf(dated.filter(d=>d.d!=x.d)).slice(0,3).map(d=>d.d)])}
+ else if(Math.random()<.5){type="Rozpoznaj pojęcie";clue=x.def;ans=x.k;const same=D.filter(d=>d.s==x.s&&d.id!=x.id);opts=shuf([x.k,...shuf(same).slice(0,3).map(d=>d.k)])}
+ else{type="Którego pojęcia dotyczy ten fakt?";clue=x.f[Math.random()*x.f.length|0];ans=x.k;const same=D.filter(d=>d.id!=x.id&&(d.s==x.s||Math.random()<.2));opts=shuf([x.k,...shuf(same).slice(0,3).map(d=>d.k)])}
+ Q.innerHTML=`<div class="score"><span>Wynik: ${qs.ok} / ${qs.n}</span><span>${qs.n?Math.round(qs.ok/qs.n*100)+"%":""}</span></div>
+ <div class="clue" style="border-color:${secOf(x.s).c}"><div class="type">${type}</div>${clue}</div>
+ <div class="opts">${opts.map(o=>`<button class="opt">${o}</button>`).join("")}</div><div class="expl" id="ex"></div>
+ <div class="row"><button class="btn" id="nx" style="visibility:hidden">Następne pytanie →</button></div>`;
+ Q.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(Q.dataset.done==1)return;Q.dataset.done=1;qs.n++;
+  const good=b.textContent==ans;if(good)qs.ok++;b.classList.add(good?"ok":"bad");
+  Q.querySelectorAll(".opt").forEach(o=>{if(o.textContent==ans)o.classList.add("ok")});
+  document.getElementById("ex").innerHTML=`<b>${x.k}</b> (${x.d}). ${x.h}`;document.getElementById("nx").style.visibility="visible"});
+ Q.dataset.done=0;document.getElementById("nx").onclick=newQ;}
+filters(document.getElementById("qflt"),n=>{qF=n;newQ()});
+// oś czasu
+(function(){const ev=D.filter(x=>x.y&&x.y>1910).sort((a,b)=>a.y-b.y);let yr=0,h="<div class='tl'>";
+ ev.forEach(x=>{const y=Math.floor(x.y);if(y!=yr){yr=y;h+=`<div class="yr">${y}</div>`}const s=secOf(x.s);
+ h+=`<div class="ev" style="--c:${s.c}"><div class="d">${x.d}</div><div class="t">${x.k}</div><div class="s">${x.def}</div></div>`});
+ document.getElementById("tl").innerHTML=h+"</div>"})();
+// nawigacja
+document.querySelector("nav").onclick=e=>{const b=e.target.closest("button");if(!b)return;
+ document.querySelectorAll("nav button").forEach(x=>x.classList.toggle("on",x==b));
+ document.querySelectorAll(".view").forEach(v=>v.classList.toggle("on",v.id=="v-"+b.dataset.v));
+ if(b.dataset.v=="fc"&&!deck.length)buildDeck();if(b.dataset.v=="quiz"&&!document.getElementById("quiz").innerHTML)newQ();
+ if(b.dataset.v=="learn"){const f=document.querySelector("#flt .chip.on");renderLearn(+f.dataset.n)}};
+upd();
+</script>
+</body>
+</html>
